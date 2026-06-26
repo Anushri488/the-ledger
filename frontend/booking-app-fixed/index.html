@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Ledger — Hotel &amp; Event Booking</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="overlay is-open" aria-hidden="false" role="dialog">
+    <div class="overlay-card" style="max-width:400px;width:100%;">
+
+      <h2 style="font-family:var(--font-display);margin-bottom:16px;text-align:center;">The Ledger</h2>
+
+      <div style="display:flex;gap:8px;margin-bottom:20px;">
+        <button type="button" id="tabLogin" class="btn btn-primary" style="flex:1;">Login</button>
+        <button type="button" id="tabSignup" class="btn btn-ghost" style="flex:1;">Sign Up</button>
+      </div>
+
+      <div id="authError" style="color:var(--error);font-size:0.85rem;margin-bottom:10px;display:none;"></div>
+      <div id="authSuccess" style="color:#4f9d92;font-size:0.85rem;margin-bottom:10px;display:none;"></div>
+
+      <!-- Login Form -->
+      <div id="loginForm">
+        <div class="card-field">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" />
+        </div>
+        <div class="card-field">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" />
+        </div>
+        <button type="button" id="loginBtn" class="btn btn-primary" style="width:100%;margin-top:8px;">Login</button>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="signupForm" style="display:none;">
+        <div class="card-field">
+          <label>Full Name</label>
+          <input type="text" id="signupName" placeholder="Aapka naam" />
+        </div>
+        <div class="card-field">
+          <label>Email</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com" />
+        </div>
+        <div class="card-field">
+          <label>Password</label>
+          <input type="password" id="signupPassword" placeholder="••••••••" />
+        </div>
+        <button type="button" id="signupBtn" class="btn btn-primary" style="width:100%;margin-top:8px;">Sign Up</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="brand-mark">
+      <span class="mark">The <span>Ledger</span></span>
+      <span class="brand-tag">Hotel &amp; Event Booking</span>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span id="userNameDisplay" style="color:var(--brass-light);font-size:0.85rem;font-weight:600;display:none;"></span>
+      <button type="button" id="myBookingsBtn" class="btn btn-ghost" style="padding:6px 14px;font-size:0.8rem;display:none;">My Bookings</button>
+      <button type="button" id="logoutBtn" class="btn btn-ghost" style="padding:6px 14px;font-size:0.8rem;display:none;">Logout</button>
+    </div>
+
+    <div class="mode-toggle" role="group" aria-label="Booking type">
+      <button type="button" id="modeHotelBtn" class="mode-btn is-active" aria-pressed="true">Hotel Stay</button>
+      <button type="button" id="modeEventBtn" class="mode-btn" aria-pressed="false">Event Booking</button>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Calendar widget + Booking form -->
+    <aside class="panel ledger-panel">
+      <h2 class="panel-heading">Plan your visit</h2>
+      <p class="panel-sub">Pick your dates, then fill in your details below.</p>
+
+      <button type="button" id="calendarToggle" class="calendar-toggle" aria-expanded="false">Select dates &#9660;</button>
+
+      <div id="calendarWrap" class="calendar-wrap">
+        <div id="calendar" class="ledger"></div>
+      </div>
+
+      <form id="bookingForm" class="booking-form" novalidate>
+        <p id="formErrorBanner" class="form-error-banner"></p>
+
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="As per ID" autocomplete="name" />
+          <span class="field-error"></span>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" />
+            <span class="field-error"></span>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="10-digit number" autocomplete="tel" />
+            <span class="field-error"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="guests">Number of Guests <span id="guestsHint" style="text-transform:lowercase;">per room</span></label>
+          <input type="number" id="guests" name="guests" min="1" placeholder="e.g. 2" />
+          <span class="field-error"></span>
+        </div>
+
+        <div class="field">
+          <label for="comments">Special Requests <em style="color:var(--text-dim); font-style:normal;">(optional)</em></label>
+          <textarea id="comments" name="comments" placeholder="Late check-in, extra bed, dietary needs…"></textarea>
+        </div>
+
+        <div id="liveSummary" class="live-summary">Pick check-in and check-out to see pricing.</div>
+      </form>
+    </aside>
+
+    <!-- Dynamic rooms / event slots -->
+    <section class="rooms-section">
+      <div class="section-head">
+        <div>
+          <h2 id="sectionLabel">Available Rooms</h2>
+          <p>Rendered live from <code>data/rooms.json</code> based on your selection.</p>
+        </div>
+      </div>
+      <div id="roomsGrid" class="rooms-grid" aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">Built for the front-end internship project · The Ledger booking UI</footer>
+
+  <!-- Booking summary modal -->
+  <div id="summaryModal" class="overlay" aria-hidden="true" role="dialog" aria-labelledby="summaryTitle">
+    <div class="overlay-card">
+      <h2 id="summaryTitle">Booking Summary</h2>
+      <p class="overlay-sub">Please review the details below before confirming.</p>
+      <ul class="summary-list">
+        <li><span>Name</span><span id="modalName"></span></li>
+        <li><span>Email</span><span id="modalEmail"></span></li>
+        <li><span>Date(s)</span><span id="modalDates"></span></li>
+        <li><span>Room / Slot</span><span id="modalRoom"></span></li>
+        <li><span>Duration</span><span id="modalNights"></span></li>
+        <li class="total"><span>Total Cost</span><span id="modalTotal"></span></li>
+      </ul>
+      <div class="overlay-actions">
+        <button type="button" id="closeModalBtn" class="btn btn-ghost">Edit details</button>
+        <button type="button" id="confirmBtn" class="btn btn-primary">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation / success screen -->
+  <div id="successScreen" class="overlay" aria-hidden="true" role="dialog" aria-labelledby="successTitle">
+    <div class="overlay-card">
+      <div class="success-icon">&#10003;</div>
+      <h2 id="successTitle">Booking confirmed</h2>
+      <p class="overlay-sub">A confirmation has been recorded under this booking ID.</p>
+      <span id="bookingIdDisplay" class="booking-id">BK000000</span>
+      <p id="successRecap"></p>
+      <div class="overlay-actions">
+        <button type="button" id="bookAnotherBtn" class="btn btn-primary">Make another booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Screen -->
+  <div id="paymentScreen" class="overlay" aria-hidden="true" role="dialog" aria-labelledby="paymentTitle">
+    <div class="overlay-card" style="max-width:440px;width:100%;">
+      <h2 id="paymentTitle" style="font-family:var(--font-display);margin-bottom:4px;">Complete Payment</h2>
+      <p class="overlay-sub" id="payAmountSub">Total due: ₹0</p>
+
+      <div class="payment-tabs">
+        <button type="button" class="pay-tab is-active" data-tab="upi">UPI</button>
+        <button type="button" class="pay-tab" data-tab="card">Card</button>
+        <button type="button" class="pay-tab" data-tab="netbanking">Net Banking</button>
+      </div>
+
+      <!-- UPI Panel -->
+      <div class="pay-panel is-active" id="panelUpi">
+        <div class="upi-apps">
+          <button type="button" class="upi-app-btn" data-upi="gpay"><span class="upi-icon">G</span>Google Pay</button>
+          <button type="button" class="upi-app-btn" data-upi="phonepe"><span class="upi-icon">₱</span>PhonePe</button>
+          <button type="button" class="upi-app-btn" data-upi="paytm"><span class="upi-icon">P</span>Paytm</button>
+        </div>
+        <p style="font-size:0.75rem;color:var(--text-dim);text-align:center;margin:0 0 10px;">— or enter UPI ID directly —</p>
+        <div class="upi-id-row">
+          <input type="text" id="upiIdInput" placeholder="yourname@upi" />
+        </div>
+      </div>
+
+      <!-- Card Panel -->
+      <div class="pay-panel" id="panelCard">
+        <div class="card-field">
+          <label>Card Number</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" />
+        </div>
+        <div class="card-field">
+          <label>Name on Card</label>
+          <input type="text" id="cardName" placeholder="As printed on card" />
+        </div>
+        <div class="card-row">
+          <div class="card-field">
+            <label>Expiry</label>
+            <input type="text" id="cardExpiry" placeholder="MM / YY" maxlength="7" />
+          </div>
+          <div class="card-field">
+            <label>CVV</label>
+            <input type="text" id="cardCvv" placeholder="•••" maxlength="4" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Net Banking Panel -->
+      <div class="pay-panel" id="panelNetbanking">
+        <div class="bank-list">
+          <button type="button" class="bank-btn" data-bank="sbi"><span class="bank-icon">🏦</span>SBI</button>
+          <button type="button" class="bank-btn" data-bank="hdfc"><span class="bank-icon">🏦</span>HDFC Bank</button>
+          <button type="button" class="bank-btn" data-bank="icici"><span class="bank-icon">🏦</span>ICICI Bank</button>
+          <button type="button" class="bank-btn" data-bank="axis"><span class="bank-icon">🏦</span>Axis Bank</button>
+          <button type="button" class="bank-btn" data-bank="kotak"><span class="bank-icon">🏦</span>Kotak Bank</button>
+          <button type="button" class="bank-btn" data-bank="other"><span class="bank-icon">🏦</span>Other</button>
+        </div>
+      </div>
+
+      <div class="pay-amount-row">
+        <span class="pay-amount-label">Amount to Pay</span>
+        <span class="pay-amount-value" id="payAmountValue">₹0</span>
+      </div>
+
+      <div class="overlay-actions" style="margin-top:14px;">
+        <button type="button" id="cancelPayBtn" class="btn btn-ghost">Back</button>
+        <button type="button" id="payNowBtn" class="btn btn-primary">Pay Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Processing screen -->
+  <div id="processingScreen" class="overlay" aria-hidden="true" role="dialog">
+    <div class="overlay-card" style="max-width:320px;text-align:center;">
+      <div class="pay-processing">
+        <div class="spinner"></div>
+        <p style="margin:0;font-weight:600;">Processing payment…</p>
+        <p style="margin:6px 0 0;font-size:0.8rem;">Please do not close this window</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Bookings Modal -->
+  <div id="myBookingsModal" class="overlay" aria-hidden="true" role="dialog">
+    <div class="overlay-card" style="max-width:500px;width:100%;max-height:80vh;overflow-y:auto;">
+      <h2 style="font-family:var(--font-display);margin-bottom:16px;">My Bookings</h2>
+      <div id="myBookingsList"></div>
+      <div class="overlay-actions" style="margin-top:16px;">
+        <button type="button" id="closeMyBookingsBtn" class="btn btn-ghost">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

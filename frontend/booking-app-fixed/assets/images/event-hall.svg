@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgH" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#241f2c"/>
+      <stop offset="1" stop-color="#12151b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgH)"/>
+  <!-- stage arch -->
+  <path d="M120 200 q80 -150 160 0" fill="none" stroke="#c9a35e" stroke-width="3"/>
+  <path d="M140 200 q60 -110 120 0" fill="none" stroke="#8f6f3a" stroke-width="2" opacity="0.7"/>
+  <!-- chandelier -->
+  <line x1="200" y1="20" x2="200" y2="55" stroke="#8f6f3a" stroke-width="2"/>
+  <circle cx="200" cy="62" r="9" fill="#e3c585"/>
+  <circle cx="180" cy="70" r="5" fill="#e3c585" opacity="0.8"/>
+  <circle cx="220" cy="70" r="5" fill="#e3c585" opacity="0.8"/>
+  <!-- rows of chairs -->
+  <g fill="#232a33" stroke="#4f9d92" stroke-width="1.5">
+    <rect x="60" y="225" width="16" height="20" rx="3"/>
+    <rect x="84" y="225" width="16" height="20" rx="3"/>
+    <rect x="108" y="225" width="16" height="20" rx="3"/>
+    <rect x="276" y="225" width="16" height="20" rx="3"/>
+    <rect x="300" y="225" width="16" height="20" rx="3"/>
+    <rect x="324" y="225" width="16" height="20" rx="3"/>
+    <rect x="60" y="252" width="16" height="20" rx="3"/>
+    <rect x="84" y="252" width="16" height="20" rx="3"/>
+    <rect x="108" y="252" width="16" height="20" rx="3"/>
+    <rect x="276" y="252" width="16" height="20" rx="3"/>
+    <rect x="300" y="252" width="16" height="20" rx="3"/>
+    <rect x="324" y="252" width="16" height="20" rx="3"/>
+  </g>
+</svg>

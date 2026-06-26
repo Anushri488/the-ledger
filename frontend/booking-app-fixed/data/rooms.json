@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "type": "hotel",
+    "title": "Standard Room",
+    "tagline": "Cosy quarters for the easy traveller",
+    "price": 2200,
+    "capacity": 2,
+    "rating": 4.2,
+    "availability": 6,
+    "image": "assets/images/standard-room.svg",
+    "amenities": ["Free Wi-Fi", "AC", "Breakfast"]
+  },
+  {
+    "id": 2,
+    "type": "hotel",
+    "title": "Deluxe Room",
+    "tagline": "Extra space, garden view, quiet mornings",
+    "price": 3500,
+    "capacity": 2,
+    "rating": 4.6,
+    "availability": 4,
+    "image": "assets/images/deluxe-room.svg",
+    "amenities": ["Free Wi-Fi", "AC", "Mini Bar", "Garden View"]
+  },
+  {
+    "id": 3,
+    "type": "hotel",
+    "title": "Suite",
+    "tagline": "A living room, a bedroom, and a view",
+    "price": 6200,
+    "capacity": 4,
+    "rating": 4.9,
+    "availability": 2,
+    "image": "assets/images/suite-room.svg",
+    "amenities": ["Free Wi-Fi", "AC", "Mini Bar", "Lounge", "City View"]
+  },
+  {
+    "id": 4,
+    "type": "event",
+    "title": "Event Hall",
+    "tagline": "For weddings, receptions and big nights",
+    "price": 45000,
+    "capacity": 250,
+    "rating": 4.7,
+    "availability": 1,
+    "image": "assets/images/event-hall.svg",
+    "amenities": ["Stage", "Sound System", "Catering", "Parking"]
+  },
+  {
+    "id": 5,
+    "type": "event",
+    "title": "Conference Room",
+    "tagline": "Sharp meetings, sharper presentations",
+    "price": 12000,
+    "capacity": 40,
+    "rating": 4.4,
+    "availability": 3,
+    "image": "assets/images/conference-room.svg",
+    "amenities": ["Projector", "Whiteboard", "Wi-Fi", "Coffee Service"]
+  }
+]

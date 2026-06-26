@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgS" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1c2229"/>
+      <stop offset="1" stop-color="#12151b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgS)"/>
+  <!-- window -->
+  <rect x="270" y="50" width="90" height="110" rx="4" fill="none" stroke="#3a4250" stroke-width="2"/>
+  <line x1="315" y1="50" x2="315" y2="160" stroke="#3a4250" stroke-width="2"/>
+  <line x1="270" y1="105" x2="360" y2="105" stroke="#3a4250" stroke-width="2"/>
+  <!-- bed -->
+  <rect x="40" y="170" width="220" height="70" rx="10" fill="#232a33" stroke="#c9a35e" stroke-width="2"/>
+  <rect x="40" y="170" width="60" height="70" rx="10" fill="#2b333d" stroke="#c9a35e" stroke-width="2"/>
+  <rect x="55" y="182" width="32" height="20" rx="6" fill="#f4ecd9"/>
+  <rect x="40" y="240" width="220" height="10" fill="#171b22"/>
+  <rect x="58" y="250" width="10" height="20" fill="#171b22"/>
+  <rect x="232" y="250" width="10" height="20" fill="#171b22"/>
+  <!-- nightstand -->
+  <rect x="278" y="195" width="46" height="45" rx="4" fill="#232a33" stroke="#3a4250" stroke-width="2"/>
+  <circle cx="301" cy="180" r="14" fill="#e3c585" opacity="0.7"/>
+</svg>

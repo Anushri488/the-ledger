@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bgD" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#202833"/>
+      <stop offset="1" stop-color="#12151b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#bgD)"/>
+  <!-- big window with curtain -->
+  <rect x="250" y="35" width="115" height="135" rx="4" fill="none" stroke="#3a4250" stroke-width="2"/>
+  <line x1="307" y1="35" x2="307" y2="170" stroke="#3a4250" stroke-width="2"/>
+  <path d="M250 35 q14 70 0 135" fill="none" stroke="#c9a35e" stroke-width="2" opacity="0.6"/>
+  <path d="M365 35 q-14 70 0 135" fill="none" stroke="#c9a35e" stroke-width="2" opacity="0.6"/>
+  <!-- headboard bed -->
+  <rect x="35" y="120" width="14" height="120" rx="6" fill="#2b333d" stroke="#c9a35e" stroke-width="2"/>
+  <rect x="49" y="150" width="200" height="90" rx="10" fill="#232a33" stroke="#c9a35e" stroke-width="2"/>
+  <rect x="64" y="160" width="40" height="26" rx="6" fill="#f4ecd9"/>
+  <rect x="108" y="160" width="40" height="26" rx="6" fill="#f4ecd9" opacity="0.85"/>
+  <rect x="49" y="240" width="200" height="10" fill="#171b22"/>
+  <!-- plant -->
+  <circle cx="335" cy="225" r="3" fill="#4f9d92"/>
+  <path d="M335 225 q-18 -30 -2 -45 M335 225 q18 -28 4 -48 M335 225 q-2 -40 2 -50" stroke="#4f9d92" stroke-width="2" fill="none"/>
+  <path d="M320 225 h30 l-5 25 h-20 z" fill="#3a3024" stroke="#8f6f3a" stroke-width="1.5"/>
+</svg>
