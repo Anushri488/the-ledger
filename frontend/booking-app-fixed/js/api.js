@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000/api';
+const API = 'https://the-ledger-xr8h.onrender.com/api';
 
 async function signup(name, email, password) {
   const res = await fetch(`${API}/auth/signup`, {
